@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forum semplice con Recaptcha</title>
+    <link rel="stylesheet" href="bootstrap.css">
+ 
+</head>
+<body>
+  <iframe name="hiddenFrame" style="display: none;"></iframe>  
+  <form  class="container" action="form.php" method="post" target="hiddenFrame">
+    <h1>FORM titolo</h1>
+  <div class=" form-group ">
+      <div>
+          <label  for="tm-form-fname"></label>
+          <input type="text" placeholder="Nome" name="nome" class="form-control" id="tm-form-fname">
+      </div>
+      <div>
+        <label for="tm-form-lname"></label>
+        <input type="text" placeholder="Cognome" name="cognome" class="form-control" id="tm-form-lname">
+      </div>
+      <div>
+        <label  for="tm-form-phone"></label>
+        <input type="tel" placeholder="Telefono" name="tel" class="form-control" id="tm-form-phone">
+      </div>
+      <div>
+        <label  for="tm-form-email"></label>
+        <input type="email" placeholder="@" name="email" class="form-control" id="tm-form-email">
+      </div>
+  </div>
+  <div class="form-group" >
+    <div>
+        <label  for="tm-form-message"></label>
+        <textarea class="form-control" name="messaggio" id="tm-form-message" cols="100" rows="5" placeholder="Messaggio..."></textarea>
+      </div>
+  </div>
+  <div >
+      <div class="g-recaptcha" data-sitekey=" ">
+      </div>
+      <div >
+          <input type="submit" value="INVIA" class="btn btn-primary mb-2">
+        </div>
+  </div>
+  </form>
+
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js'></script>
+  <script>
+    function scaleCaptcha(elementWidth) {
+  
+  var reCaptchaWidth = 304;
+
+    var containerWidth = $('.container').width();
+
+  if(reCaptchaWidth > containerWidth) {
+  
+    var captchaScale = containerWidth / reCaptchaWidth;
+   
+    $('.g-recaptcha').css({
+      'transform':'scale('+captchaScale+')'
+    });
+  }
+}
+
+$(function() { 
+
+  scaleCaptcha();
+  $(window).resize( $.throttle( 100, scaleCaptcha ) );
+  
+});
+
+  </script>
+</body>
+</html>
